@@ -1,282 +1,135 @@
 
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Box, Code, Database, X } from "lucide-react";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { cn } from "@/lib/utils";
-import { AppleDock } from "@/components/AppleDock";
-import { motion, AnimatePresence } from "framer-motion";
-
-interface Tag {
-  name: string;
-}
-
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  tags: Tag[];
-  details?: string;
-}
-
-const ProjectCard = ({ project }: { project: Project }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <>
-      <motion.div 
-        className="bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-700"
-        whileHover={{ scale: 1.03 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        onClick={toggleOpen}
-      >
-        <div className="h-48 overflow-hidden">
-          <motion.img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-        <div className="p-6">
-          <h3 className="text-2xl font-bold text-white mb-2">
-            {project.title}
-          </h3>
-          <p className="text-gray-300 mb-4">
-            {project.description}
-          </p>
-          <motion.div 
-            className="flex flex-wrap gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, staggerChildren: 0.1 }}
-          >
-            {project.tags.map((tag, index) => (
-              <motion.span
-                key={index}
-                className="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ backgroundColor: "#4B5563", scale: 1.05 }}
-              >
-                {tag.name}
-              </motion.span>
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={toggleOpen}
-          >
-            <motion.div
-              className="bg-gray-900 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-700"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                <motion.div 
-                  className="h-64 md:h-80 overflow-hidden"
-                  whileInView={{ y: [10, 0], opacity: [0, 1] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-                <motion.button 
-                  className="absolute top-4 right-4 p-2 bg-gray-800 rounded-full shadow-md hover:bg-gray-700 transition-colors border border-gray-700"
-                  onClick={toggleOpen}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="h-5 w-5 text-gray-300" />
-                </motion.button>
-              </div>
-              <motion.div 
-                className="p-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <motion.h2 
-                  className="text-3xl font-bold text-white mb-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  {project.title}
-                </motion.h2>
-                <motion.p 
-                  className="text-gray-300 mb-6 text-lg"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  {project.description}
-                </motion.p>
-                <motion.div 
-                  className="mb-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <h3 className="text-xl font-semibold mb-3 text-white">Technologies</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <motion.span
-                        key={index}
-                        className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 + (index * 0.1) }}
-                        whileHover={{ backgroundColor: "#4B5563", y: -2 }}
-                      >
-                        {tag.name}
-                      </motion.span>
-                    ))}
-                  </div>
-                </motion.div>
-                <motion.div 
-                  className="mb-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  <h3 className="text-xl font-semibold mb-3 text-white">Project Details</h3>
-                  <p className="text-gray-300">
-                    {project.details || "This is a detailed description of the project. It includes the purpose, methodology, and outcomes of the project. The details are meant to give a comprehensive understanding of what the project is about, how it was developed, and what it achieves."}
-                  </p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
-};
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
-  const [mounted, setMounted] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const projects: Project[] = [
+  const navigationLinks = [
+    { name: "Home", path: "/" },
+    { name: "Projects", path: "/projects" },
+    { name: "About", path: "/about" }
+  ];
+  
+  const projects = [
     {
-      title: "Smart Home Automation",
-      description: "Arduino-based home automation system with mobile app control",
-      image: "/lovable-uploads/963ae073-5a03-48ed-9e1d-bb0f9f86d4ec.png",
-      tags: [
-        { name: "Arduino" },
-        { name: "IoT" },
-        { name: "Mobile App" }
-      ],
-      details: "This project utilizes Arduino microcontrollers to create a comprehensive home automation system. The system includes sensors for temperature, humidity, and motion detection. Users can control lights, appliances, and climate systems through a custom-built mobile application. The system uses Wi-Fi connectivity to allow remote access and control from anywhere."
+      title: "E-Commerce Platform",
+      description: "A full-featured online shopping platform with cart, checkout, and payment integration.",
+      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+      link: "#"
     },
     {
-      title: "Face Attendance System",
-      description: "Python application for analyzing and visualizing large datasets",
-      image: "/lovable-uploads/ef26aad7-5bc3-4fb4-a44e-737ca9c4b935.png",
-      tags: [
-        { name: "Python" },
-        { name: "Firebase" },
-        { name: "Realtime Detection" }
-      ],
-      details: "The Face Attendance System is built with Python using OpenCV and Firebase for backend storage. It implements real-time face detection and recognition algorithms to accurately identify individuals and mark their attendance. The system includes a user-friendly dashboard for administrators to view attendance reports, manage user profiles, and export data for analysis."
+      title: "Portfolio Website",
+      description: "A responsive portfolio website showcasing projects and skills with modern design.",
+      tags: ["React", "Tailwind CSS", "Framer Motion"],
+      link: "#"
     },
     {
-      title: "Library Management System",
-      description: "Java-based system for managing library operations",
-      image: "/lovable-uploads/963ae073-5a03-48ed-9e1d-bb0f9f86d4ec.png",
-      tags: [
-        { name: "Java" },
-        { name: "Desktop App" },
-        { name: "Database" }
-      ],
-      details: "This Java application streamlines library operations with features for book cataloging, member management, checkout/return processes, and fine calculations. It includes a search function, reporting tools, and an intuitive interface designed for library staff. The system uses a relational database to maintain data integrity and provide efficient access to library resources."
+      title: "Task Management App",
+      description: "A productivity app for managing tasks, projects, and deadlines with team collaboration.",
+      tags: ["React", "Firebase", "Material UI"],
+      link: "#"
+    },
+    {
+      title: "Weather Dashboard",
+      description: "Real-time weather information with forecasts, maps, and location-based updates.",
+      tags: ["React", "OpenWeather API", "Chart.js"],
+      link: "#"
+    },
+    {
+      title: "Social Media Analytics",
+      description: "Dashboard for tracking and analyzing social media performance across platforms.",
+      tags: ["React", "D3.js", "Node.js", "Express"],
+      link: "#"
+    },
+    {
+      title: "Recipe Finder",
+      description: "Search and discover recipes based on ingredients, dietary restrictions, and preferences.",
+      tags: ["React", "Spoonacular API", "Styled Components"],
+      link: "#"
     }
   ];
 
-  // Container variants for staggered animation
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <AppleDock />
-      <div className="container mx-auto px-4 py-12">
-        <motion.div 
-          className="flex justify-between items-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+    <div className="min-h-screen bg-[#030303] px-6 py-12">
+      <div className="container mx-auto">
+        <div className="mb-8 flex justify-between items-center">
           <motion.h1 
-            className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
-            whileInView={{ scale: [0.9, 1] }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
           >
             My Projects
           </motion.h1>
-          <Link 
-            to="/" 
-            className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
-          >
-            <motion.span
-              whileHover={{ x: -5 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              Back to Home
-            </motion.span>
-          </Link>
-        </motion.div>
+          
+          <div className="flex gap-4">
+            {navigationLinks.map((link) => (
+              <Link 
+                key={link.name} 
+                to={link.path} 
+                className="px-4 py-2 text-white hover:text-blue-400 transition-colors rounded-md"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
         
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={mounted ? "show" : "hidden"}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-muted-foreground max-w-2xl mb-12"
         >
+          Explore my portfolio of projects spanning web development, mobile applications, and interactive experiences.
+        </motion.p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="h-full"
+              onHoverStart={() => setHoveredCard(index)}
+              onHoverEnd={() => setHoveredCard(null)}
             >
-              <ProjectCard project={project} />
+              <Card className={`dark-card h-full transition-all duration-300 ${hoveredCard === index ? 'scale-in' : ''}`}>
+                <CardHeader>
+                  <CardTitle>{project.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-gray-300 mb-4">
+                    {project.description}
+                  </CardDescription>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span 
+                        key={tagIndex} 
+                        className="text-xs px-2 py-1 rounded-full bg-gray-800 text-gray-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <a 
+                    href={project.link} 
+                    className="text-blue-400 hover:text-blue-300 transition-colors text-sm"
+                  >
+                    View Project →
+                  </a>
+                </CardFooter>
+              </Card>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
