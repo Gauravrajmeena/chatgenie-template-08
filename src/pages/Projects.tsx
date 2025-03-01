@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Code, Database, X } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
@@ -29,48 +29,62 @@ const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <>
       <motion.div 
-        className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
-        whileHover={{ scale: 1.02 }}
+        className="bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-700"
+        whileHover={{ scale: 1.03 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         onClick={toggleOpen}
       >
         <div className="h-48 overflow-hidden">
-          <img 
+          <motion.img 
             src={project.image} 
             alt={project.title} 
             className="w-full h-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           />
         </div>
         <div className="p-6">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+          <h3 className="text-2xl font-bold text-white mb-2">
             {project.title}
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-300 mb-4">
             {project.description}
           </p>
-          <div className="flex flex-wrap gap-2">
+          <motion.div 
+            className="flex flex-wrap gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, staggerChildren: 0.1 }}
+          >
             {project.tags.map((tag, index) => (
-              <span
+              <motion.span
                 key={index}
-                className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                className="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ backgroundColor: "#4B5563", scale: 1.05 }}
               >
                 {tag.name}
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={toggleOpen}
           >
             <motion.div
-              className="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              className="bg-gray-900 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-700"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -78,47 +92,82 @@ const ProjectCard = ({ project }: { project: Project }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
-                <div className="h-64 md:h-80 overflow-hidden">
+                <motion.div 
+                  className="h-64 md:h-80 overflow-hidden"
+                  whileInView={{ y: [10, 0], opacity: [0, 1] }}
+                  transition={{ duration: 0.5 }}
+                >
                   <img 
                     src={project.image} 
                     alt={project.title} 
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <button 
-                  className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
+                </motion.div>
+                <motion.button 
+                  className="absolute top-4 right-4 p-2 bg-gray-800 rounded-full shadow-md hover:bg-gray-700 transition-colors border border-gray-700"
                   onClick={toggleOpen}
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <X className="h-5 w-5 text-gray-700" />
-                </button>
+                  <X className="h-5 w-5 text-gray-300" />
+                </motion.button>
               </div>
-              <div className="p-6">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <motion.div 
+                className="p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <motion.h2 
+                  className="text-3xl font-bold text-white mb-4"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
                   {project.title}
-                </h2>
-                <p className="text-gray-600 mb-6 text-lg">
+                </motion.h2>
+                <motion.p 
+                  className="text-gray-300 mb-6 text-lg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
                   {project.description}
-                </p>
-                <div className="mb-6">
-                  <h3 className="text-xl font-semibold mb-3">Technologies</h3>
+                </motion.p>
+                <motion.div 
+                  className="mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <h3 className="text-xl font-semibold mb-3 text-white">Technologies</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, index) => (
-                      <span
+                      <motion.span
                         key={index}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                        className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + (index * 0.1) }}
+                        whileHover={{ backgroundColor: "#4B5563", y: -2 }}
                       >
                         {tag.name}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
-                </div>
-                <div className="mb-4">
-                  <h3 className="text-xl font-semibold mb-3">Project Details</h3>
-                  <p className="text-gray-700">
+                </motion.div>
+                <motion.div 
+                  className="mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <h3 className="text-xl font-semibold mb-3 text-white">Project Details</h3>
+                  <p className="text-gray-300">
                     {project.details || "This is a detailed description of the project. It includes the purpose, methodology, and outcomes of the project. The details are meant to give a comprehensive understanding of what the project is about, how it was developed, and what it achieves."}
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
@@ -128,6 +177,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
 };
 
 const Projects = () => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const projects: Project[] = [
     {
       title: "Smart Home Automation",
@@ -164,25 +219,64 @@ const Projects = () => {
     }
   ];
 
+  // Container variants for staggered animation
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-gray-900 text-white">
       <AppleDock />
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">My Projects</h1>
+      <div className="container mx-auto px-4 py-12">
+        <motion.div 
+          className="flex justify-between items-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.h1 
+            className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+            whileInView={{ scale: [0.9, 1] }}
+            transition={{ duration: 0.5 }}
+          >
+            My Projects
+          </motion.h1>
           <Link 
             to="/" 
-            className="text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
           >
-            Back to Home
+            <motion.span
+              whileHover={{ x: -5 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              Back to Home
+            </motion.span>
           </Link>
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={mounted ? "show" : "hidden"}
+        >
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <ProjectCard project={project} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
