@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Box, Code, Database, X } from "lucide-react";
+import { Box, Code, Database, X, Github, Youtube } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { AppleDock } from "@/components/AppleDock";
@@ -14,6 +15,8 @@ interface Project {
   image: string;
   tags: Tag[];
   details?: string;
+  githubUrl?: string;
+  youtubeUrl?: string;
 }
 const ProjectCard = ({
   project
@@ -183,6 +186,44 @@ const ProjectCard = ({
                     {project.details || "This is a detailed description of the project. It includes the purpose, methodology, and outcomes of the project. The details are meant to give a comprehensive understanding of what the project is about, how it was developed, and what it achieves."}
                   </p>
                 </motion.div>
+                
+                <motion.div className="mt-8 flex flex-wrap gap-4" initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.7
+            }}>
+                  {project.githubUrl && (
+                    <motion.a 
+                      href={project.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Github className="h-5 w-5" />
+                      View Code
+                    </motion.a>
+                  )}
+                  
+                  {project.youtubeUrl && (
+                    <motion.a 
+                      href={project.youtubeUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-600 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Youtube className="h-5 w-5" />
+                      Watch Demo
+                    </motion.a>
+                  )}
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>}
@@ -205,7 +246,9 @@ const Projects = () => {
     }, {
       name: "Mobile App"
     }],
-    details: "This project utilizes Arduino microcontrollers to create a comprehensive home automation system. The system includes sensors for temperature, humidity, and motion detection. Users can control lights, appliances, and climate systems through a custom-built mobile application. The system uses Wi-Fi connectivity to allow remote access and control from anywhere."
+    details: "This project utilizes Arduino microcontrollers to create a comprehensive home automation system. The system includes sensors for temperature, humidity, and motion detection. Users can control lights, appliances, and climate systems through a custom-built mobile application. The system uses Wi-Fi connectivity to allow remote access and control from anywhere.",
+    githubUrl: "https://github.com/username/smart-home",
+    youtubeUrl: "https://youtube.com/watch?v=example1"
   }, {
     title: "Face Attendance System",
     description: "Python application for analyzing and visualizing large datasets",
@@ -217,7 +260,9 @@ const Projects = () => {
     }, {
       name: "Realtime Detection"
     }],
-    details: "The Face Attendance System is built with Python using OpenCV and Firebase for backend storage. It implements real-time face detection and recognition algorithms to accurately identify individuals and mark their attendance. The system includes a user-friendly dashboard for administrators to view attendance reports, manage user profiles, and export data for analysis."
+    details: "The Face Attendance System is built with Python using OpenCV and Firebase for backend storage. It implements real-time face detection and recognition algorithms to accurately identify individuals and mark their attendance. The system includes a user-friendly dashboard for administrators to view attendance reports, manage user profiles, and export data for analysis.",
+    githubUrl: "https://github.com/username/face-attendance",
+    youtubeUrl: "https://youtube.com/watch?v=example2"
   }, {
     title: "Library Management System",
     description: "Java-based system for managing library operations",
@@ -229,7 +274,9 @@ const Projects = () => {
     }, {
       name: "Database"
     }],
-    details: "This Java application streamlines library operations with features for book cataloging, member management, checkout/return processes, and fine calculations. It includes a search function, reporting tools, and an intuitive interface designed for library staff. The system uses a relational database to maintain data integrity and provide efficient access to library resources."
+    details: "This Java application streamlines library operations with features for book cataloging, member management, checkout/return processes, and fine calculations. It includes a search function, reporting tools, and an intuitive interface designed for library staff. The system uses a relational database to maintain data integrity and provide efficient access to library resources.",
+    githubUrl: "https://github.com/username/library-management",
+    youtubeUrl: "https://youtube.com/watch?v=example3"
   }];
 
   // Container variants for staggered animation
