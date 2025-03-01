@@ -1,4 +1,3 @@
-
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { Box, Code, Database } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
@@ -7,8 +6,6 @@ import { AppleDock } from "@/components/AppleDock";
 import { SplineSceneBasic } from "@/components/SplineSceneBasic";
 import { GradientCards } from "@/components/GradientCards";
 import { ThreeDCards } from "@/components/ThreeDCards";
-import { Link } from "react-router-dom";
-
 const ProjectPreview = ({
   title,
   description,
@@ -58,26 +55,8 @@ const Index = () => {
     icon: Database,
     area: "md:[grid-area:2/1/3/13]"
   }];
-  
-  const navigationLinks = [
-    { name: "Home", path: "/" },
-    { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" }
-  ];
-  
   return <div>
       <AppleDock />
-      <div className="absolute top-4 right-4 z-50 flex gap-4">
-        {navigationLinks.map((link) => (
-          <Link 
-            key={link.name} 
-            to={link.path} 
-            className="px-4 py-2 text-white hover:text-blue-400 transition-colors rounded-md"
-          >
-            {link.name}
-          </Link>
-        ))}
-      </div>
       <HeroGeometric badge="Gaurav's Projects" title1="My Digital" title2="Portfolio" />
       <div className="bg-[#030303] px-8">
         <div className="container mx-auto py-16">
