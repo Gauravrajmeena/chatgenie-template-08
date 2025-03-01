@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Code, Database, X, Github, Youtube } from "lucide-react";
@@ -6,9 +5,11 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { AppleDock } from "@/components/AppleDock";
 import { motion, AnimatePresence } from "framer-motion";
+
 interface Tag {
   name: string;
 }
+
 interface Project {
   title: string;
   description: string;
@@ -18,6 +19,7 @@ interface Project {
   githubUrl?: string;
   youtubeUrl?: string;
 }
+
 const ProjectCard = ({
   project
 }: {
@@ -230,6 +232,7 @@ const ProjectCard = ({
       </AnimatePresence>
     </>;
 };
+
 const Projects = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -261,8 +264,8 @@ const Projects = () => {
       name: "Realtime Detection"
     }],
     details: "The Face Attendance System is built with Python using OpenCV and Firebase for backend storage. It implements real-time face detection and recognition algorithms to accurately identify individuals and mark their attendance. The system includes a user-friendly dashboard for administrators to view attendance reports, manage user profiles, and export data for analysis.",
-    githubUrl: "https://github.com/username/face-attendance",
-    youtubeUrl: "https://youtube.com/watch?v=example2"
+    githubUrl: "https://github.com/Rca-Team/face-attendce",
+    youtubeUrl: "https://www.youtube.com/watch?v=AsIkI6Cl5es"
   }, {
     title: "Library Management System",
     description: "Java-based system for managing library operations",
@@ -279,7 +282,6 @@ const Projects = () => {
     youtubeUrl: "https://youtube.com/watch?v=example3"
   }];
 
-  // Container variants for staggered animation
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -291,6 +293,7 @@ const Projects = () => {
       }
     }
   };
+
   return <div className="min-h-screen bg-gray-900 text-white">
       <AppleDock />
       <div className="container mx-auto px-4 py-12">
@@ -337,4 +340,5 @@ const Projects = () => {
       </div>
     </div>;
 };
+
 export default Projects;
