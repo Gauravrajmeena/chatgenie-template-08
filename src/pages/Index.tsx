@@ -57,7 +57,7 @@ const Index = () => {
   }];
   return <div>
       <AppleDock />
-      <HeroGeometric badge="Gaurav's Projects" title1="My Digital" title2="Portfolio" />
+      <HeroGeometric badge="Gaurav's Projects" title1="My Digital" title2="Mart" />
       <div className="bg-[#030303] px-8">
         <div className="container mx-auto py-16">
           <SplineSceneBasic />
