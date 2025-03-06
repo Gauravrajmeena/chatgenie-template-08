@@ -5,20 +5,20 @@ import { Code, Database, Terminal } from "lucide-react";
 
 export function ThreeDCards() {
   const cards = [{
-    title: "Face attendence system ",
-    description: "this is our face attendence it will recognize your face for your attendence and save data to firebase fpr more view this video ",
+    title: "Face Attendence System",
+    description: "This is our face attendence it will recognize your face for your attendence and save data to firebase for more view this video",
     icon: <Code className="w-6 h-6 text-white" />,
     color: "bg-gradient-to-br from-purple-500 to-blue-500",
     image: "/lovable-uploads/ef26aad7-5bc3-4fb4-a44e-737ca9c4b935.png"
   }, {
     title: "Jarvis AI",
-    description: "Smart chatbot with face auth ",
+    description: "The AI-Powered Chatbot project employs advanced natural language processing algorithms to create an interactive digital assistant",
     icon: <Database className="w-6 h-6 text-white" />,
     color: "bg-gradient-to-br from-blue-500 to-teal-500",
     image: "/lovable-uploads/4a18b1d0-cf87-4ff8-a6f9-8ec41ee6d14a.png"
   }, {
-    title: "Gaurav coder AI",
-    description: "Experience with Docker, CI/CD pipelines, and cloud deployments",
+    title: "Gaurav Coder",
+    description: "AI-powered development platform on Hugging Face for coding assistance and collaboration",
     icon: <Terminal className="w-6 h-6 text-white" />,
     color: "bg-gradient-to-br from-teal-500 to-emerald-500",
     image: "/lovable-uploads/2f184cc4-d1a2-4025-ab9e-210599fd5b6c.png"

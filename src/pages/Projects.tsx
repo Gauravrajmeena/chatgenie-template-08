@@ -255,18 +255,18 @@ const Projects = () => {
     setMounted(true);
   }, []);
   const projects: Project[] = [{
-    title: "Smart Home Automation",
-    description: "Arduino-based home automation system with mobile app control",
-    image: "/lovable-uploads/d57fbc30-1954-45ea-833a-a843a926279d.png",
+    title: "Jarvis AI",
+    description: "AI-Powered Chatbot with advanced natural language processing",
+    image: "/lovable-uploads/4a18b1d0-cf87-4ff8-a6f9-8ec41ee6d14a.png",
     tags: [{
-      name: "Arduino"
+      name: "NLP"
     }, {
-      name: "IoT"
+      name: "AI"
     }, {
-      name: "Mobile App"
+      name: "Python"
     }],
-    details: "This project utilizes Arduino microcontrollers to create a comprehensive home automation system. The system includes sensors for temperature, humidity, and motion detection. Users can control lights, appliances, and climate systems through a custom-built mobile application. The system uses Wi-Fi connectivity to allow remote access and control from anywhere.",
-    githubUrl: "https://github.com/username/smart-home",
+    details: "The AI-Powered Chatbot project employs advanced natural language processing algorithms to create an interactive digital assistant. This intelligent system can handle customer inquiries, provide recommendations, and learn from interactions to improve over time. Designed for various applications, it helps businesses enhance customer service while reducing operational costs. Our chatbot exemplifies the power of AI in today's digital landscape.",
+    githubUrl: "https://github.com/username/jarvis-ai",
     youtubeUrl: "https://youtube.com/watch?v=example1"
   }, {
     title: "Face Attendance System",
@@ -284,18 +284,18 @@ const Projects = () => {
     youtubeUrl: "https://www.youtube.com/watch?v=AsIkI6Cl5es",
     liveDemoUrl: "https://presence-electronic.vercel.app/"
   }, {
-    title: "Library Management System",
-    description: "Java-based system for managing library operations",
-    image: "/lovable-uploads/7fe59bb7-c755-45df-ab0d-0cce2ca36041.png",
+    title: "Gaurav Coder",
+    description: "AI-powered development platform for coding assistance and collaboration",
+    image: "/lovable-uploads/2f184cc4-d1a2-4025-ab9e-210599fd5b6c.png",
     tags: [{
-      name: "Java"
+      name: "AI"
     }, {
-      name: "Desktop App"
+      name: "Hugging Face"
     }, {
-      name: "Database"
+      name: "Software Engineering"
     }],
-    details: "This Java application streamlines library operations with features for book cataloging, member management, checkout/return processes, and fine calculations. It includes a search function, reporting tools, and an intuitive interface designed for library staff. The system uses a relational database to maintain data integrity and provide efficient access to library resources.",
-    githubUrl: "https://github.com/username/library-management",
+    details: "The \"Gemini Coder\" platform on Hugging Face, created by Gauravog, is an exceptional resource aimed at supporting developers with their coding projects. It features sophisticated AI models specifically designed for programming tasks such as debugging and automation. Additionally, the platform may offer tools for collaborative coding, code enhancement, and educational materials to assist learners. Emphasizing technological advancement, it acts as a link between artificial intelligence and software engineering, optimizing processes and boosting efficiency. For further information, visit Gemini Coder.",
+    githubUrl: "https://github.com/username/gaurav-coder",
     youtubeUrl: "https://youtube.com/watch?v=example3"
   }];
 
