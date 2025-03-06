@@ -296,7 +296,8 @@ const Projects = () => {
     }],
     details: "The \"Gemini Coder\" platform on Hugging Face, created by Gauravog, is an exceptional resource aimed at supporting developers with their coding projects. It features sophisticated AI models specifically designed for programming tasks such as debugging and automation. Additionally, the platform may offer tools for collaborative coding, code enhancement, and educational materials to assist learners. Emphasizing technological advancement, it acts as a link between artificial intelligence and software engineering, optimizing processes and boosting efficiency. For further information, visit Gemini Coder.",
     githubUrl: "https://github.com/username/gaurav-coder",
-    youtubeUrl: "https://youtube.com/watch?v=example3"
+    youtubeUrl: "https://youtube.com/watch?v=example3",
+    liveDemoUrl: "https://huggingface.co/spaces/Gauravorg/gemini-coder"
   }];
 
   const containerVariants = {
