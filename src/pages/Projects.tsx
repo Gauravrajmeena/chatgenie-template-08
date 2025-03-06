@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Box, Code, Database, X, Github, Youtube } from "lucide-react";
+import { Box, Code, Database, X, Github, Youtube, ExternalLink } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { AppleDock } from "@/components/AppleDock";
@@ -18,6 +18,7 @@ interface Project {
   details?: string;
   githubUrl?: string;
   youtubeUrl?: string;
+  liveDemoUrl?: string;
 }
 
 const ProjectCard = ({
@@ -225,6 +226,20 @@ const ProjectCard = ({
                       Watch Demo
                     </motion.a>
                   )}
+                  
+                  {project.liveDemoUrl && (
+                    <motion.a 
+                      href={project.liveDemoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ExternalLink className="h-5 w-5" />
+                      Live Demo
+                    </motion.a>
+                  )}
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -265,7 +280,8 @@ const Projects = () => {
     }],
     details: "The Face Attendance System is built with Python using OpenCV and Firebase for backend storage. It implements real-time face detection and recognition algorithms to accurately identify individuals and mark their attendance. The system includes a user-friendly dashboard for administrators to view attendance reports, manage user profiles, and export data for analysis.",
     githubUrl: "https://github.com/Rca-Team/face-attendce",
-    youtubeUrl: "https://www.youtube.com/watch?v=AsIkI6Cl5es"
+    youtubeUrl: "https://www.youtube.com/watch?v=AsIkI6Cl5es",
+    liveDemoUrl: "https://presence-electronic.vercel.app/"
   }, {
     title: "Library Management System",
     description: "Java-based system for managing library operations",
