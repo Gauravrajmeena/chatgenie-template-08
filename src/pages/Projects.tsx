@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Code, Database, X, Github, Youtube, ExternalLink } from "lucide-react";
@@ -256,7 +257,7 @@ const Projects = () => {
   const projects: Project[] = [{
     title: "Smart Home Automation",
     description: "Arduino-based home automation system with mobile app control",
-    image: "/lovable-uploads/963ae073-5a03-48ed-9e1d-bb0f9f86d4ec.png",
+    image: "/lovable-uploads/d57fbc30-1954-45ea-833a-a843a926279d.png",
     tags: [{
       name: "Arduino"
     }, {
@@ -285,7 +286,7 @@ const Projects = () => {
   }, {
     title: "Library Management System",
     description: "Java-based system for managing library operations",
-    image: "/lovable-uploads/963ae073-5a03-48ed-9e1d-bb0f9f86d4ec.png",
+    image: "/lovable-uploads/7fe59bb7-c755-45df-ab0d-0cce2ca36041.png",
     tags: [{
       name: "Java"
     }, {
